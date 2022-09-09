@@ -19,10 +19,8 @@ function SalesCard() {
 
     useEffect(() => {
 
-        const dmin = minDate.toISOString().slice(0, 10  );
-        const dmax = maxDate.toISOString().slice(0, 10  );
-
-        console.log(dmin);
+        const dmin = minDate.toISOString().slice(0, 10);
+        const dmax = maxDate.toISOString().slice(0, 10);
 
         axios.get(`${BASE_URL}/sales?minDate=${dmin}&maxDate=${dmax}`)
             .then(response => {
@@ -67,16 +65,16 @@ function SalesCard() {
                     <tbody>
                         {sales.map(sale => {
                             return (
-                                <tr key = {sale.id}>
+                                <tr key={sale.id}>
                                     <td className="tc992"> {sale.id}</td>
-                                    <td className="tc576">{new Date(sale.date).toLocaleDateString()}</td> 
+                                    <td className="tc576">{new Date(sale.date).toLocaleDateString()}</td>
                                     <td>{sale.sellerName}</td>
                                     <td className="tc992">{sale.visited}</td>
                                     <td className="tc992">{sale.deals}</td>
                                     <td>R$ {sale.amount.toFixed(2)}</td>
                                     <td>
                                         <div className="dsmeta-btn-container">
-                                            <NotificationButton />
+                                            <NotificationButton saleId={sale.id} />
                                         </div>
                                     </td>
                                 </tr>
